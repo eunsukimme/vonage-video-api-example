@@ -1,13 +1,13 @@
 body,
 html {
   background-color: gray;
-  height: 100%;
+  height: 100vh;
 }
 
 #videos {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   margin-left: auto;
   margin-right: auto;
 }

@@ -10,16 +10,25 @@ const token = process.env.TOKEN;
 // Handling all of our errors here by alerting them
 function handleError(error: any) {
   if (error) {
+    console.log(error);
     alert(error.message);
   }
 }
 
 function initializeSession() {
+  // check api key, session id and token is provided
   if (!apiKey || !sessionId || !token) {
     console.log("API key, SessionID and Token is not provided.");
 
     return;
   }
+
+  // check the system is satisfy requirements
+  if (OT.checkSystemRequirements() !== 1) {
+    console.log("system does not satisfy the requirements");
+  }
+
+  // create session object
   const session = OT.initSession(apiKey, sessionId);
 
   // Subscribe to a newly created stream

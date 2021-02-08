@@ -12,7 +12,8 @@ module.exports = (env) => {
 
   return {
     devtool: env.NODE_ENV === "production" ? undefined : "eval",
-    entry: "./src/index.ts",
+    entry: "./src/index.tsx",
+    target: "web",
     resolve: {
       plugins: [new TsconfigPathsPlugin()],
       extensions: [".ts", ".tsx", ".js", ".jsx"],
@@ -24,8 +25,9 @@ module.exports = (env) => {
           use: [{ loader: MiniCssExtractPlugin.loader }, "css-loader"],
         },
         {
-          test: /\.ts$/,
+          test: /\.tsx?$/,
           use: "ts-loader",
+          exclude: "/node_modules/",
         },
       ],
     },
