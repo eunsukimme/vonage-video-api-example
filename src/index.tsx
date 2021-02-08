@@ -1,6 +1,12 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "@components/App";
-import "./index.css";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from '@components/App';
+import './index.css';
+import { RootStoreContext, rootStore } from '@stores/index';
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(
+  <RootStoreContext.Provider value={rootStore}>
+    <App />
+  </RootStoreContext.Provider>,
+  document.getElementById('root'),
+);

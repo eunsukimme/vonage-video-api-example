@@ -1,33 +1,34 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 // webpack.config.js
 // `webpack` command will pick up this config setup by default
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
-const Dotenv = require("dotenv-webpack");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = (env) => {
   console.log(env.NODE_ENV);
 
   return {
-    devtool: env.NODE_ENV === "production" ? undefined : "eval",
-    entry: "./src/index.tsx",
-    target: "web",
+    devtool: env.NODE_ENV === 'production' ? undefined : 'eval',
+    entry: './src/index.tsx',
+    target: 'web',
     resolve: {
       plugins: [new TsconfigPathsPlugin()],
-      extensions: [".ts", ".tsx", ".js", ".jsx"],
+      extensions: ['.ts', '.tsx', '.js', '.jsx'],
     },
     module: {
       rules: [
         {
           test: /\.css$/,
-          use: [{ loader: MiniCssExtractPlugin.loader }, "css-loader"],
+          use: [{ loader: MiniCssExtractPlugin.loader }, 'css-loader'],
         },
         {
           test: /\.tsx?$/,
-          use: "ts-loader",
-          exclude: "/node_modules/",
+          use: 'ts-loader',
+          exclude: '/node_modules/',
         },
       ],
     },
@@ -35,16 +36,16 @@ module.exports = (env) => {
       new Dotenv(),
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
-        template: "public/index.html",
+        template: 'public/index.html',
       }),
       new MiniCssExtractPlugin(),
     ],
     output: {
-      filename: "[name].[chunkhash].js",
-      path: path.resolve(__dirname, "dist"),
+      filename: '[name].[chunkhash].js',
+      path: path.resolve(__dirname, 'dist'),
     },
     devServer: {
-      contentBase: path.join(__dirname, "dist"),
+      contentBase: path.join(__dirname, 'dist'),
       compress: true,
       port: 3000,
       hot: true,
@@ -56,8 +57,8 @@ module.exports = (env) => {
         cacheGroups: {
           commons: {
             test: /[\\/]node_modules[\\/]/,
-            name: "vendors",
-            chunks: "initial",
+            name: 'vendors',
+            chunks: 'initial',
           },
         },
       },

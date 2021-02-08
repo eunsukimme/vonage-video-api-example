@@ -1,4 +1,4 @@
-import OT from "@opentok/client";
+import OT from '@opentok/client';
 
 // replace these values with those generated in your TokBox Account
 const apiKey = process.env.API_KEY;
@@ -18,42 +18,42 @@ function handleError(error: any) {
 function initializeSession() {
   // check api key, session id and token is provided
   if (!apiKey || !sessionId || !token) {
-    console.log("API key, SessionID and Token is not provided.");
+    console.log('API key, SessionID and Token is not provided.');
 
     return;
   }
 
   // check the system is satisfy requirements
   if (OT.checkSystemRequirements() !== 1) {
-    console.log("system does not satisfy the requirements");
+    console.log('system does not satisfy the requirements');
   }
 
   // create session object
   const session = OT.initSession(apiKey, sessionId);
 
   // Subscribe to a newly created stream
-  session.on("streamCreated", function (event) {
+  session.on('streamCreated', function (event) {
     session.subscribe(
       event.stream,
-      "subscriber",
+      'subscriber',
       {
-        insertMode: "append",
-        width: "100%",
-        height: "100%",
+        insertMode: 'append',
+        width: '100%',
+        height: '100%',
       },
-      handleError
+      handleError,
     );
   });
 
   // Create a publisher
   const publisher = OT.initPublisher(
-    "publisher",
+    'publisher',
     {
-      insertMode: "append",
-      width: "100%",
-      height: "100%",
+      insertMode: 'append',
+      width: '100%',
+      height: '100%',
     },
-    handleError
+    handleError,
   );
 
   // Connect to the session
